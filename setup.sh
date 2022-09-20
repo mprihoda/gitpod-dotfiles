@@ -2,13 +2,12 @@
 
 set -e
 
-S=$(dirname $0)
-
-cp -r "${S}"/m2 /home/gitpod/.m2
-
+# Clean up the lefover .doom.d from original image
+# The owner has been erroneously root in some version, so sudo
 if [ -e /home/gitpod/.doom.d ]
 then
-	        rm -rf /home/gitpod/.doom.d
+	        sudo rm -rf /home/gitpod/.doom.d
 fi
 
-ln -s "${S}"/doom.d /home/gitpod/.doom.d && doom sync
+nix build --no-link /home/gitpod/.dotfiles#homeConfigurations.gitpod.activationPackage
+"$(nix path-info /home/gitpod/.dotfiles#homeConfigurations.gitpod.activationPackage)"/activate
