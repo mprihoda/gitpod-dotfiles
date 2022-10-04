@@ -24,7 +24,7 @@
     ".doom.d" = {
       source = ./doom.d;
       onChange = ''
-        /home/gitpod/emacs.d/bin/doom sync
+        /home/gitpod/.emacs.d/bin/doom sync
       '';
     };
 
