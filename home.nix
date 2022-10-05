@@ -4,11 +4,7 @@
   home.username = "gitpod";
   home.homeDirectory = "/home/gitpod";
 
-  home.packages = [
-    pkgs.fd
-    pkgs.ripgrep
-    pkgs._1password
-  ];
+  home.packages = [ pkgs.fd pkgs.ripgrep pkgs._1password ];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
@@ -39,6 +35,13 @@
       source = ./sbt/eid-credentials.tmpl;
       onChange = ''
         ${pkgs._1password}/bin/op inject -f -i ~/.sbt/eid-credentials.tmpl -o ~/.sbt/.eid-credentials
+      '';
+    };
+
+    ".config/github-copilot/hosts.json.tmpl" = {
+      source = ./github-copilot/hosts.json.tmpl;
+      onChange = ''
+        ${pkgs._1password}/bin/op inject -f -i ~/.config/github-copilot/hosts.json.tmpl -o ~/.config/github-copilot/hosts.json
       '';
     };
   };
