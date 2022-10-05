@@ -21,4 +21,5 @@ nix build --no-link /home/gitpod/.dotfiles#homeConfigurations.gitpod.activationP
 "$(nix path-info /home/gitpod/.dotfiles#homeConfigurations.gitpod.activationPackage)"/activate
 
 # Run the emacs daemon
+export EMACSDIR=/workspace/.emacs.d
 emacs --daemon
