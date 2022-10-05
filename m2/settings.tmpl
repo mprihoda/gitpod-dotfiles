@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>/workspace/m2-repository/</localRepository>
+  <servers>
+    <server>
+      <id>nexus</id>
+      <username>{{ op://e-BS/Nexus eIdentity/username }}</username>
+      <password>{{ op://e-BS/Nexus eIdentity/password }}</password>
+    </server>
+    <server>
+      <id>eid</id>
+      <username>{{ op://e-BS/Nexus eIdentity/username }}</username>
+      <password>{{ op://e-BS/Nexus eIdentity/password }}</password>
+    </server>
+    <server>
+      <id>eid-snapshots</id>
+      <username>{{ op://e-BS/Nexus eIdentity/username }}</username>
+      <password>{{ op://e-BS/Nexus eIdentity/password }}</password>
+    </server>
+    <server>
+      <id>eIdentity snapshots</id>
+      <username>{{ op://e-BS/Nexus eIdentity/username }}</username>
+      <password>{{ op://e-BS/Nexus eIdentity/password }}</password>
+    </server>
+    <server>
+      <id>eIdentity releases</id>
+      <username>{{ op://e-BS/Nexus eIdentity/username }}</username>
+      <password>{{ op://e-BS/Nexus eIdentity/password }}</password>
+    </server>
+  </servers>
+</settings>

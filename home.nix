@@ -28,9 +28,18 @@
       '';
     };
 
-    ".m2" = {
-      source = ./m2;
+    ".m2/settings.tmpl" = {
+      source = ./m2/settings.tmpl;
+      onChange = ''
+        ${pkgs._1password}/bin/op inject -f -i ~/.m2/settings.tmpl -o ~/.m2/settings.xml
+      '';
+    };
 
+    ".sbt/eid-credentials.tmpl" = {
+      source = ./sbt/eid-credentials.tmpl;
+      onChange = ''
+        ${pkgs._1password}/bin/op inject -f -i ~/.sbt/eid-credentials.tmpl -o ~/.sbt/.eid-credentials
+      '';
     };
   };
 
