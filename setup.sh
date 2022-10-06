@@ -33,10 +33,4 @@ then
 	emacs_opts="$emacs_opts --chdir $GITPOD_REPO_ROOT"
 fi
 
-# Run the emacs daemon
-if [ -e "$GITPOD_REPO_ROOT/flake.lock" ]
-then
-  direnv exec "${GITPOD_REPO_ROOT}" emacs $emacs_opts
-else
-  emacs $emacs_opts
-fi
+emacs $emacs_opts
