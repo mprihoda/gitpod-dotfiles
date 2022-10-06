@@ -24,25 +24,28 @@
       '';
     };
 
-    ".m2/settings.tmpl" = {
+    ".m2/settings.xml.tmpl" = {
       source = ./m2/settings.tmpl;
-      onChange = ''
-        ${pkgs._1password}/bin/op inject -f -i ~/.m2/settings.tmpl -o ~/.m2/settings.xml
-      '';
     };
 
-    ".sbt/eid-credentials.tmpl" = {
+    ".sbt/.eid-credentials.tmpl" = {
       source = ./sbt/eid-credentials.tmpl;
-      onChange = ''
-        ${pkgs._1password}/bin/op inject -f -i ~/.sbt/eid-credentials.tmpl -o ~/.sbt/.eid-credentials
-      '';
     };
 
     ".config/github-copilot/hosts.json.tmpl" = {
       source = ./github-copilot/hosts.json.tmpl;
-      onChange = ''
-        ${pkgs._1password}/bin/op inject -f -i ~/.config/github-copilot/hosts.json.tmpl -o ~/.config/github-copilot/hosts.json
+    };
+
+    ".config/after_init.sh" = {
+      text = ''
+        #!${pkgs.bash}/bin/bash
+        TEMPLATES=$(${pkgs.fd}/bin/fd -H -E .dotfiles tmpl /home/gitpod)
+        for i in $TEMPLATES;
+        do
+          ${pkgs._1password}/bin/op inject -f -i $i -o ''${i%%.tmpl}
+        done
       '';
+      executable = true;
     };
   };
 
