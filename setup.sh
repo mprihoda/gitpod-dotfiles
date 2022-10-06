@@ -36,7 +36,7 @@ fi
 # Run the emacs daemon
 if [ -e "$GITPOD_REPO_ROOT/flake.lock" ]
 then
-  direnv exec emacs $emacs_opts
+  direnv exec "${GITPOD_REPO_ROOT}" emacs $emacs_opts
 else
   emacs $emacs_opts
 fi
