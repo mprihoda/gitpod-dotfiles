@@ -26,5 +26,17 @@ fi
 nix build --no-link /home/gitpod/.dotfiles#homeConfigurations.gitpod.activationPackage
 "$(nix path-info /home/gitpod/.dotfiles#homeConfigurations.gitpod.activationPackage)"/activate
 
+emacs_opts="--daemon"
+
+if [ -d "$GITPOD_REPO_ROOT" ]
+then
+	emacs_opts="$emacs_opts --chdir $GITPOD_REPO_ROOT"
+fi
+
 # Run the emacs daemon
-emacs --daemon
+if [ -e "$GITPOD_REPO_ROOT/flake.lock" ]
+then
+  direnv exec emacs $emacs_opts
+else
+  emacs $emacs_opts
+fi
