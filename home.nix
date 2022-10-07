@@ -24,13 +24,9 @@
       '';
     };
 
-    ".m2/settings.xml.tmpl" = {
-      source = ./m2/settings.tmpl;
-    };
+    ".m2/settings.xml.tmpl" = { source = ./m2/settings.tmpl; };
 
-    ".sbt/.eid-credentials.tmpl" = {
-      source = ./sbt/eid-credentials.tmpl;
-    };
+    ".sbt/.eid-credentials.tmpl" = { source = ./sbt/eid-credentials.tmpl; };
 
     ".config/github-copilot/hosts.json.tmpl" = {
       source = ./github-copilot/hosts.json.tmpl;
@@ -47,6 +43,8 @@
       '';
       executable = true;
     };
+
+    ".terminfo/x/xterm-kitty" = { source = ./terminfo/xterm-kitty; };
   };
 
   # Let Home Manager install and manage itself.
