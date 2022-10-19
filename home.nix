@@ -40,7 +40,7 @@
           # only in interactive shell
           if [ "''${-#*i}" == "$-" ]; then
 
-            if [ ! -e "~/.config/.initialized"  ]; then
+            if [ ! -e ~/.config/.initialized  ]; then
               touch ~/.config/.initialized
 
               if [ -n "''${TS_STATE_TAILSCALE}" ]; then
