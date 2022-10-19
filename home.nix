@@ -49,7 +49,7 @@
                 echo "''${TS_STATE_TAILSCALE}" | sudo tee /var/lib/tailscale/tailscaled.state > /dev/null
               fi
 
-              pidof tailscaled || sudo tailscaled &
+              pidof tailscaled || sudo sh -c 'nohup tailscaled > /home/gitpod/.run/tailscaled.log 2>&1 &'
 
               if [ -n "''${TS_STATE_TAILSCALE}" ]; then
                 sudo -E tailscale up
