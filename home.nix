@@ -37,29 +37,34 @@
           #!${pkgs.bash}/bin/bash
           set -e
 
-          if [ ! -e "~/.config/.initialized"  ]; then
-            touch ~/.config/.initialized
+          # only in interactive shell
+          if [ "''${-#*i}" == "$-" ]; then
 
-            if [ -n "''${TS_STATE_TAILSCALE}" ]; then
-              # restore the tailscale state from gitpod user's env vars
-              sudo mkdir -p /var/lib/tailscale
-              echo "''${TS_STATE_TAILSCALE}" | sudo tee /var/lib/tailscale/tailscaled.state > /dev/null
-            fi
-            sudo nohup tailscaled &
+            if [ ! -e "~/.config/.initialized"  ]; then
+              touch ~/.config/.initialized
 
-            if [ -n "''${TS_STATE_TAILSCALE}" ]; then
-              sudo -E tailscale up
-            else
-              sudo -E tailscale up --hostname "gitpod-$(echo ''${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name)" --accept-routes
-              # store the tailscale state into gitpod user
-              gp env TS_STATE_TAILSCALE="$(sudo cat /var/lib/tailscale/tailscaled.state)"
-            fi
+              if [ -n "''${TS_STATE_TAILSCALE}" ]; then
+                # restore the tailscale state from gitpod user's env vars
+                sudo mkdir -p /var/lib/tailscale
+                echo "''${TS_STATE_TAILSCALE}" | sudo tee /var/lib/tailscale/tailscaled.state > /dev/null
+              fi
 
-            TEMPLATES=$(${pkgs.fd}/bin/fd -H -E .dotfiles tmpl /home/gitpod)
-            for i in $TEMPLATES;
-            do
-              ${pkgs._1password}/bin/op inject -f -i $i -o ''${i%%.tmpl}
-            done
+              pidof tailscaled || sudo tailscaled &
+
+              if [ -n "''${TS_STATE_TAILSCALE}" ]; then
+                sudo -E tailscale up
+              else
+                sudo -E tailscale up --hostname "gitpod-$(echo ''${GITPOD_WORKSPACE_CONTEXT} | jq -r .repository.name)" --accept-routes
+                # store the tailscale state into gitpod user
+                gp env TS_STATE_TAILSCALE="$(sudo cat /var/lib/tailscale/tailscaled.state)"
+              fi
+
+              TEMPLATES=$(${pkgs.fd}/bin/fd -H -E .dotfiles tmpl /home/gitpod)
+              for i in $TEMPLATES;
+              do
+                ${pkgs._1password}/bin/op inject -f -i $i -o ''${i%%.tmpl}
+              done
+           fi
 
         fi
       '';

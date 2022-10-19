@@ -16,7 +16,7 @@ if [ ! -e "/home/gitpod/.run" ]; then
 fi
 echo "export EMACSDIR=$EMACSDIR XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >> /home/gitpod/.bashrc.d/301-doom-workspace.sh
 
-echo "test -x \"~/.config/after_init.sh\" && source ~/.config/after_init.sh" >> /home/gitpod/.bashrc.d/302-after-init.sh
+echo "test -x \"~/.config/after_init.sh\" && ~/.config/after_init.sh" >> /home/gitpod/.bashrc.d/302-after-init.sh
 
 # Clean up the lefover .doom.d from original image
 # The owner has been erroneously root in some version, so sudo
