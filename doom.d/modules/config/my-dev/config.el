@@ -74,11 +74,6 @@
 
 ;; Github Copilot
 ;; accept completion from copilot and fallback to company
-(defun my-tab ()
-  (interactive)
-  (or (copilot-accept-completion)
-      (company-indent-or-complete-common nil)))
-
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
   :config
