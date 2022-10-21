@@ -43,6 +43,9 @@
             if [ ! -e ~/.config/.initialized  ]; then
               touch ~/.config/.initialized
 
+              # Make sure we have env vars
+              eval $(gp env -e)
+
               if [ -n "''${TS_STATE_TAILSCALE}" ]; then
                 # restore the tailscale state from gitpod user's env vars
                 sudo mkdir -p /var/lib/tailscale
