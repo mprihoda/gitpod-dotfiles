@@ -18,6 +18,8 @@ echo "export EMACSDIR=$EMACSDIR XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >> /home/gitpo
 
 echo "test -x ~/.config/after_init.sh && ~/.config/after_init.sh" >> /home/gitpod/.bashrc.d/302-after-init.sh
 
+echo "if [ -f ~/.bashrc ]; then . ~/.bashrc; fi" >> /home/.gitpod/.bash_profile
+
 # Clean up the lefover .doom.d from original image
 # The owner has been erroneously root in some version, so sudo
 if [ -d /home/gitpod/.doom.d ]
